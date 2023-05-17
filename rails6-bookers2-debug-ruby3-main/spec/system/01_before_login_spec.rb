@@ -20,6 +20,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
       it 'Sign upリンクが表示される: 緑色のボタンの表示が「Sign up」である' do
         sign_up_link = find_all('a')[6].native.inner_text
+        binding.pry
         expect(sign_up_link).to match(/Sign up/)
       end
       it 'Sign upリンクの内容が正しい' do
@@ -71,7 +72,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context 'リンクの内容を確認' do
       subject { current_path }
-      
+
       it 'Bookersを押すと、トップ画面に遷移する' do
         home_link = find_all('a')[0].native.inner_text
         home_link = home_link.delete(' ')
