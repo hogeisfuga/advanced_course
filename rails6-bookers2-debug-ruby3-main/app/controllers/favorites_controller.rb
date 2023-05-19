@@ -1,7 +1,6 @@
 class FavoritesController < ApplicationController
   def create
-    book = Book.find(params[:book_id])
-    favorite = current_user.favorites.new(book_id: book.id)
+    favorite = current_user.favorites.new(book_id: params[:book_id])
     favorite.save
     redirect_to back_path
   end
@@ -15,7 +14,16 @@ class FavoritesController < ApplicationController
   private
 
   def back_path
-    request.path.match?(/users/) ? users_path(current_user) : books_path
+    case request.path
+    when %r(^\/users)
+      return users_path(current_user)
+    when %r(^\/books\/\d)
+      return book_path(params[:book_id])
+    when %r(^\/books$)
+      return books_path
+    else
+      root_path
+    end
   end
 
 end
