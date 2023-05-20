@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+  <div class='mt-2 text-center'>
+    <%= form_with url: search_path, method: :get do |f| %>
+      <%= f.text_field :search_query, value: params[:search_query] %>
+      <%= f.select :search_model, [['Users', 'User'], ['Books', 'Book']] %>
+      <%= f.select :search_type, [['前方一致', 'start'], ['完全一致', 'exact'], ['後方一致', 'end']] %>
+    <%= f.submit 'Search' %>
+    <% end %>
+  </div>
+<% end %>

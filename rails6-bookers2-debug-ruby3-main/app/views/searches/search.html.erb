@@ -1,0 +1,12 @@
+<h2><%= "#{@search_model}s search for \"#{@search_query}\"" %> </h2>
+
+<% if @results.length == 0 %>
+  <p>検索結果はありません。</p>
+<% else %>
+  <% if @search_model == 'User' %>
+    <%= render 'users/index', users: @results %>
+  <% elsif @search_model == 'Book' %>
+    <%= render 'books/index', books: @results %>
+  <% end %>
+<% end %>
+
