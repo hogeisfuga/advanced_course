@@ -1,4 +1,8 @@
 <h2 class='mr-2'>Follower Users</h2>
 <did class='container'>
-  <%= render 'index', users: @followers %>
+  <% if @followers.size == 0 %>
+    <p>ユーザーはいません</p>
+  <% else %>
+    <%= render 'index', users: @followers %>
+  <% end %>
 </did>
