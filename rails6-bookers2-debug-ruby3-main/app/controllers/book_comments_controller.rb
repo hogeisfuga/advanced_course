@@ -1,20 +1,18 @@
 class BookCommentsController < ApplicationController
 
   def create
-    comment = current_user.book_comments.new(book_comment_params)
-    if comment.save
-      redirect_to book_path(comment.book)
+    @comment = current_user.book_comments.new(book_comment_params)
+    @book = @comment.book
+    if @comment.save
+      render 'create.js.erb'
     else
-      @book = comment.book
-      @comment = comment
-      render 'books/show'
+      render 'comment_error.js.erb'
     end
   end
 
   def destroy
-    comment = current_user.book_comments.find(params[:id])
-    comment.destroy
-    redirect_to book_path(params[:book_id])
+    @comment = current_user.book_comments.find(params[:id])
+    @comment.destroy
   end
 
 
