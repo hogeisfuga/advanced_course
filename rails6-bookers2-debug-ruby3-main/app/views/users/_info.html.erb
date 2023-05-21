@@ -22,6 +22,11 @@
         <%= render 'relationships/form', user: user %>
       <% end %>
     </th>
+    <th>
+      <% if current_user.mutual_follower?(user) %>
+        <%= render 'message_rooms/button', user: user %>
+      <% end %>
+    </th>
   </tr>
 </table>
 

@@ -1,0 +1,2 @@
+document.getElementById("messages_list").innerHTML = '<%= j(render(partial: "messages/index", locals: {messages: @messages, room: @room})) %>';
+document.getElementById("message_content").value = '';

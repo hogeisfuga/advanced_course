@@ -15,5 +15,8 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: [:create, :destroy]
+  resources :message_rooms, only: [:create, :show] do
+    resources :messages, only: [:create]
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

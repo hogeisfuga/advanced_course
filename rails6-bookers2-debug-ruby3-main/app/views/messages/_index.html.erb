@@ -1,0 +1,16 @@
+<div id='messages_list' style='min-height: 200px;' >
+  <% messages.each do |m| %>
+    <% if m.user.id == current_user.id %>
+      <div class='d-flex justify-content-end'>
+        <div class='mr-3 my-2'><%= m.content %></div>
+        <div class='text-sm my-2'>日時：<%= m.created_at.strftime("%-m/%-d %H:%M") %></div>
+      </div>
+    <% else %>
+      <div class='d-flex justify-content-start'>
+        <div class='text-sm my-2'>日時：<%= m.created_at.strftime("%-m/%-d %H:%M") %></div>
+        <div class='ml-3 my-2'><%= m.content %></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+

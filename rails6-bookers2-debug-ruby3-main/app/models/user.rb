@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :messages
+  has_many :message_room_users
+  has_many :message_rooms, through: :message_room_users
 
   has_one_attached :profile_image
 
@@ -37,6 +40,20 @@ class User < ApplicationRecord
 
   def follow?(user)
     followings.include?(user)
+  end
+
+  def mutual_follower?(user)
+    followings.include?(user) && user.followings.include?(self)
+  end
+
+  def has_message_room_with?(user)
+    ids = user.message_rooms.ids
+    message_rooms.ids.any? { |id| ids.include?(id) }
+  end
+
+  def room_with(user)
+    room_id = user.message_rooms.ids & message_rooms.ids
+    MessageRoom.find(room_id)
   end
 
   def get_profile_image
