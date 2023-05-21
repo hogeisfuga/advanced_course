@@ -7,7 +7,9 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    to = Time.zone.now.at_end_of_day
+    from = (to - 6.days).at_beginning_of_day
+    @books = Book.sort_by_favorites_count_desc(from, to)
     @book = Book.new
   end
 
