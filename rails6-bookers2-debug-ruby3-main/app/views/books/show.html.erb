@@ -28,10 +28,13 @@
           <td>
             コメント数: <%= @book.book_comments.size %>
           </td>
+          <td>
+            閲覧数: <%= @book.viewed_counts.size %>
+          </td>
         </tr>
       </table>
       <%= render 'book_comments/index', book: @book %>
-      <%= render partial: 'book_comments/form', locals: { book: @book, comment: @comment } %>
+      <%= render partial: 'book_comments/form', locals: { book: @book, comment: @book.book_comments.new } %>
     </div>
   </div>
 </div>

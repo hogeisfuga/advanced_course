@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :message_room_users
   has_many :message_rooms, through: :message_room_users
 
+  has_many :viewed_counts
+
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
