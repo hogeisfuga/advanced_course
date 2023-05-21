@@ -8,6 +8,11 @@ class MessageRoomsController < ApplicationController
   def show
     @room = MessageRoom.find(params[:id])
     @chat_with = @room.users.select {|user| user.id != current_user.id }
+    # TODO [].lastは辛い
+    unless current_user.mutual_follower?(@chat_with.last)
+      redirect_to users_path
+      flash[:notice] = '相互フォローしていないためメッセージを送ることはできません。'
+    end
     @messages = @room.messages.order(:id)
   end
 
