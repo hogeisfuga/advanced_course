@@ -30,32 +30,8 @@
           </td>
         </tr>
       </table>
-      <% @book.book_comments.each do |book_comment| %>
-        <div class='d-flex mt-3'>
-          <div>
-            <%= link_to(book_comment.user) do %>
-              <%= image_tag book_comment.user.get_profile_image, size:"100x100" %><br>
-              <%= book_comment.user.name %>
-            <% end %>
-          </div>
-          <div class='m-2'><%= book_comment.comment %></div>
-          <div class='m-2'>
-            <% if current_user.id == book_comment.user_id %>
-              <%= link_to 'Destroy', book_book_comment_path(@book, book_comment), method: :delete, class: 'btn btn-sm btn-danger' %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <%= render 'layouts/errors', obj: @comment %>
-      <%= form_with model: [@book, @comment], local:true do |f|%>
-        <div class="form-group">
-          <%= f.label :comment %>
-          <%= f.text_area :comment, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.submit 'Submit', class: 'btn btn-success' %>
-        </div>
-      <% end %>
+      <%= render 'book_comments/index', book: @book %>
+      <%= render partial: 'book_comments/form', locals: { book: @book, comment: @comment } %>
     </div>
   </div>
 </div>
