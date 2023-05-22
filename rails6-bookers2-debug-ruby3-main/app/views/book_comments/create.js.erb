@@ -1,2 +1,4 @@
+document.getElementById("comment-count-<%= @book.id %>").innerHTML = 'コメント数: <%= @book.book_comments.size %>';
 document.getElementById("book_comments").innerHTML = '<%= j(render(partial: "book_comments/index", locals: {book: @book})) %>';
-document.getElementById("book_comment_comment").textContent = '';
+document.getElementById("book_comment_comment").value = '';
+document.getElementById("book_comment_errors").innerHTML = '';
