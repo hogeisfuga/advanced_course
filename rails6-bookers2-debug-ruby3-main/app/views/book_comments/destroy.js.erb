@@ -1,1 +1,2 @@
 document.getElementById("book-comment-<%= @comment.id %>").remove();
+document.getElementById("comment-count-<%= @comment.book.id %>").innerHTML = 'コメント数: <%= @comment.book.book_comments.size %>';
