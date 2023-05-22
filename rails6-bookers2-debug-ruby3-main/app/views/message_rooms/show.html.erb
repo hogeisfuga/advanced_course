@@ -1,5 +1,5 @@
 <div id='messages' class='container' style="width: 600px;">
-  <h2><%= @chat_with.last.name %>さんとのチャット</h2>
+  <h2><%= @with_user.name %>さんとのチャット</h2>
   <%= render 'messages/index', messages: @messages, room: @room %>
   <%= render 'messages/form', room: @room %>
 </div>

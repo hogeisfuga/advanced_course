@@ -1,4 +1,6 @@
 class MessageRoomsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     if create_room
       redirect_to @room
@@ -7,9 +9,8 @@ class MessageRoomsController < ApplicationController
 
   def show
     @room = MessageRoom.find(params[:id])
-    @chat_with = @room.users.select {|user| user.id != current_user.id }
-    # TODO [].lastは辛い
-    unless current_user.mutual_follower?(@chat_with.last)
+    @with_user = MessageRoomUser.room_member_with(@room.id, current_user.id)
+    unless current_user.mutual_follower?(@with_user)
       redirect_to users_path
       flash[:notice] = '相互フォローしていないためメッセージを送ることはできません。'
     end

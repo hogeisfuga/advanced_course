@@ -49,13 +49,12 @@ class User < ApplicationRecord
   end
 
   def has_message_room_with?(user)
-    ids = user.message_rooms.ids
-    message_rooms.ids.any? { |id| ids.include?(id) }
+    room_with(user).nil? ? false : true
   end
 
   def room_with(user)
     room_id = user.message_rooms.ids & message_rooms.ids
-    MessageRoom.find(room_id)
+    MessageRoom.find_by(id: room_id)
   end
 
   def get_profile_image
