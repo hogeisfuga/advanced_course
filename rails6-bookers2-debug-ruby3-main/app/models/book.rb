@@ -6,6 +6,10 @@ class Book < ApplicationRecord
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title]
+  end
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
